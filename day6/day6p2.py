@@ -8,7 +8,7 @@ if __name__ == "__main__":
     dataDict.update({0: 0, 6: 0, 7: 0, 8: 0})
     for i in range(256):
         temp = dataDict[0]
-        for j in range(0, 8):
+        for j in range(8):
             dataDict[j] = dataDict[j + 1]
         dataDict[8] = temp
         dataDict[6] += temp

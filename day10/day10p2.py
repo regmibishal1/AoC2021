@@ -15,18 +15,6 @@ def check(string):
                 stack.pop()
             else:
                 return ''
-    return string
-
-
-def findMissing(string):
-    stack = []
-    for j in string:
-        if j in open_list:
-            stack.append(j)
-        elif j in close_list:
-            ind = close_list.index(j)
-            if (len(stack) > 0) and (open_list[ind] == stack[len(stack) - 1]):
-                stack.pop()
     return stack
 
 
@@ -47,16 +35,11 @@ if __name__ == "__main__":
     unCorrupted = []
     for x in data:
         unCorrupted.append(check(x))
-    unCorrupted = list(filter(lambda s: s != '', unCorrupted))
-
-    missing = []
-    for x in unCorrupted:
-        missing.append(findMissing(x))
-    missing = [''.join([close_list[open_list.index(y)] for y in x[::-1]]) for x in missing]
+    missing = [''.join([close_list[open_list.index(y)] for y in x[::-1]]) for x in list(filter(lambda s: s != '', unCorrupted))]
 
     scores = []
     for x in missing:
         scores.append(getScore(x))
 
     scores.sort()
-    print(scores[len(scores) // 2])
+    print(scores[len(scores) // 2])  # index starting at zero allows us to use the truncated value
